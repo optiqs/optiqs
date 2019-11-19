@@ -12,117 +12,126 @@ As an example, let's say you want to retrieve some nested property from your sta
 
 ```typescript
 
-    /* ui/team-page/selectors.ts */
+/* ui/team-page/selectors.ts */
 
-    export const selectUiTeamPageTeamName =
-        (state: State) =>
-            state.ui.teamPage.name
-            
-    /* ui/team-page/update-team-name.ts */
+export const selectUiTeamPageTeamName =
+    (state: State) =>
+        state.ui.teamPage.name
 
-    export const updateUiTeamPageTeamName =
-        (name: string) =>
-            ({
-                type: 'UI/TEAM_PAGE/UPDATE_TEAM_NAME',
-                payload: name
-            })
+/* ui/team-page/update-team-name.ts */
 
-    export const uiTeamPageTeamNameUpdated =
-        (name: string) =>
-            ({
-                type: 'UI/TEAM_PAGE/TEAM_NAME_UPDATED',
-                payload: name
-            })
+export const updateUiTeamPageTeamName =
+    (name: string) =>
+        ({
+            type: 'TEAM_PAGE/UPDATE_TEAM_NAME',
+            payload: name
+        })
 
-    export const uiTeamPageTeamNameUpdateFailed =
-        (name: string) =>
-            ({
-                type: 'UI/TEAM_PAGE/TEAM_NAME_UPDATE_FAILED',
-                payload: name
-            })
+export const uiTeamPageTeamNameUpdated =
+    (name: string) =>
+        ({
+            type: 'TEAM_PAGE/TEAM_NAME_UPDATED',
+            payload: name
+        })
 
-    export function* updateUiTeamPageTeamNameSaga({payload:{name}}: Action) {
-        const saved = yield call(api, 'url', {name})
-        if (saved.isSuccess)
-            yield put(uiTeamPageTeamNameUpdated(name))
-        else
-            yield put(uiTeamPageTeamNameUpdateFailed(name))
-    }
+export const uiTeamPageTeamNameUpdateFailed =
+    (name: string) =>
+        ({
+            type: 'TEAM_PAGE/TEAM_NAME_UPDATE_FAILED',
+            payload: name
+        })
 
-    export const uiTeamPageTeamNameReducer =
-        (state: UiTeamPageStateTeamNameState, action: UpdatedAction) =>
-            action.type === 'UI/TEAM_PAGE/UPDATE_TEAM_NAME'
-            ? action.payload
-            : state
+export function* updateUiTeamPageTeamNameSaga(
+    {payload:{name}}: Action
+) {
+    const saved = yield call(api, 'url', {name})
+    if (saved.isSuccess)
+        yield put(uiTeamPageTeamNameUpdated(name))
+    else
+        yield put(uiTeamPageTeamNameUpdateFailed(name))
+}
 
-    /* ui/team-page/update-team-name.test.ts */
-    
-    test('my saga actually works...', () => {...})
+export const uiTeamPageTeamNameReducer = (
+    state: UiTeamPageStateTeamNameState,
+    action: UpdatedAction
+) => action.type === 'UI/TEAM_PAGE/UPDATE_TEAM_NAME'
+     ? action.payload
+     : state
 
-    test('I have to test reducers? what?', () => {
-        expect(uiTeamPageTeamNameReducer(...)).toEqual(...)
-    })
+/* ui/team-page/update-team-name.test.ts */
 
-    /* ui/team-page/selectors.test.ts */
+test('my saga actually works...', () => {...})
 
-    test('I have to test selectors too?', () => {
-        expect(selectUiTeamPageTeamName(...)).toEqual(...)
-    })
-    
-    /* ui/team-page/index.ts */
+test('I have to test reducers? what?', () => {
+    expect(uiTeamPageTeamNameReducer(...))
+        .toEqual(...)
+})
 
-    export const uiTeamPageReducer = combineReducers({
-        teamName: uiTeamPageTeamNameReducer,
-        ...otherReducers
-    })
+/* ui/team-page/selectors.test.ts */
+
+test('I have to test selectors too?', () => {
+    expect(selectUiTeamPageTeamName(...))
+        .toEqual(...)
+})
+
+/* ui/team-page/index.ts */
+
+export const uiTeamPageReducer = combineReducers({
+    teamName: uiTeamPageTeamNameReducer,
+    ...otherReducers
+})
 ```
 
 With optics, that would look more like:
 
 ```typescript
 
-    /* lenses.ts */
+/* lenses.ts */
 
-    export const getUi =
-        Lens.fromProp<State>()('ui')
+export const getUi =
+    Lens.fromProp<State>()('ui')
 
-    export const getTeamPage =
-        Lens.fromProp<Ui>()('teamPage') 
+export const getTeamPage =
+    Lens.fromProp<Ui>()('teamPage') 
 
-    export const getUiTeamPageTeamName =
-        Lens.fromProp<TeamPage>()('teamName')
+export const getUiTeamPageTeamName =
+    Lens.fromProp<TeamPage>()('teamName')
 
-    export const selectUiTeamPageTeamName =
-        getUi
-        .compose(getTeamPage)
-        .compose(getTeamPageTeamName)
+export const selectUiTeamPageTeamName =
+    getUi
+    .compose(getTeamPage)
+    .compose(getTeamPageTeamName)
 
-    /* ui/team-page/update-team-name.ts */
+/* ui/team-page/update-team-name.ts */
 
-    export const updateUiTeamPageTeamName =
-        (name: string) =>
-            ({
-                type: 'UI/TEAM_PAGE/UPDATE_TEAM_NAME',
-                payload: name
-            })
+export const updateUiTeamPageTeamName =
+    (name: string) =>
+        ({
+            type: 'UI/TEAM_PAGE/UPDATE_TEAM_NAME',
+            payload: name
+        })
 
-    export function* updateUiTeamPageTeamNameSaga({payload:{name}}: Action) {
-        const saved = yield call(api, 'url', {name})
-        if (saved.isSuccess)
-            yield put(updateState(
-                selectUiTeamPageTeamName.set(name)
+export function* updateUiTeamPageTeamNameSaga(
+    {payload:{name}}: Action
+) {
+    const saved = yield call(api, 'url', {name})
+    if (saved.isSuccess)
+        yield put(updateState(
+            selectUiTeamPageTeamName.set(name)
+        ))
+    else
+        yield put(updateState(
+            selectErrors.modify(appendError(
+                "Failed to update team name."
             ))
-        else
-            yield put(updateState(
-                selectErrors.modify(appendError("Failed to update team name."))
-            ))
-    }
+        ))
+}
 
-    /* ui/team-page/update-team-name.test.ts */
-    
-    test('my saga actually works...', () => {...})
+/* ui/team-page/update-team-name.test.ts */
 
-    /***** No reducers here! *****/
+test('my saga actually works...', () => {...})
+
+/***** No reducers here! *****/
 ```
 
 Note that we don't have to write tests for the reducers or selectors on the second case, because there are no reducers, and no selectors, just lenses.
