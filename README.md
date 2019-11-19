@@ -150,7 +150,7 @@ Optics also makes you think more generically about your update functions, since 
 ## but wait, I still have to write all those lenses...
 <img src="https://media.giphy.com/media/l1KVaj5UcbHwrBMqI/source.gif" width="200" height="120" />
 
-[not really]([https://](https://github.com/optics/optics-gen))
+[not really](https://github.com/optics/optics-gen)
 
 ## Dependencies
 
