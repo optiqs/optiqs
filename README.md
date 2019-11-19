@@ -12,9 +12,9 @@ As an example, let's say you want to retrieve some nested property from your sta
 
 ---
 
-<img style="float:left" src="docs/standard.png" />
-<img src="docs/optics.png" />
-<div style="clear:both"/>
+Standard            |  Optics
+:-------------------------:|:-------------------------:
+![](docs/standard.png)  |  ![](docs/optics.png)
 
 ---
 
