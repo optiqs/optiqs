@@ -106,29 +106,16 @@ With optics, that would look more like:
                 payload: name
             })
 
-    export const uiTeamPageTeamNameUpdated =
-        (name: string) =>
-            ({
-                type: 'UI/TEAM_PAGE/TEAM_NAME_UPDATED',
-                payload: name
-            })
-
-    export const uiTeamPageTeamNameUpdateFailed =
-        (name: string) =>
-            ({
-                type: 'UI/TEAM_PAGE/TEAM_NAME_UPDATE_FAILED',
-                payload: name
-            })
-
     export function* updateUiTeamPageTeamNameSaga({payload:{name}}: Action) {
         const saved = yield call(api, 'url', {name})
         if (saved.isSuccess)
             yield put(updateState(
                 selectUiTeamPageTeamName.set(name)
             ))
-            yield put(uiTeamPageTeamNameUpdated(name))
         else
-            yield put(uiTeamPageTeamNameUpdateFailed(name))
+            yield put(updateState(
+                selectErrors.modify(appendError("Failed to update team name."))
+            ))
     }
 
     /* ui/team-page/update-team-name.test.ts */
