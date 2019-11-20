@@ -1,4 +1,5 @@
-import {updateState, reducer} from './optics'
+import {updateState, reducer, OpticsAction} from './optics'
+import {createStore} from 'redux'
 
 type TestState = {
   name: string
@@ -29,4 +30,10 @@ test('reducer with multiple update functions applies all functions to state', ()
   const expected = updateFn3(updateFn2(updateFn1(state)))
   const actual = reducer(state, updateState([updateFn1, updateFn2, updateFn3]))
   expect(actual).toEqual(expected)
+})
+
+test('reducer is compatible with createStore', () => {
+  type State = {a: string}
+  const store = createStore<State, OpticsAction<State>, void, void>(reducer)
+  expect(store).toBeDefined()
 })
