@@ -4,12 +4,11 @@ import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 
 import App from './components/App'
-import reducers from './reducers'
+import {reducer, OpticsAction} from '@myopia/optics'
+import {State} from './types'
 
-import {Store} from './types'
-
-const store: Store = createStore(
-  reducers,
+const store = createStore<State, OpticsAction<State>, void, void>(
+  reducer,
   (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
     (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 )

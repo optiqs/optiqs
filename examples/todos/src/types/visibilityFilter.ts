@@ -5,6 +5,8 @@ export type VisibilityFilterState = {
 }
 
 export type VisibilityFilterAction = {
-  type: 'SET_VISIBILITY_FILTER'
-  readonly filter: VisibilityFilter
+  readonly type: 'SET_VISIBILITY_FILTER'
+  readonly payload: {
+    readonly filter: VisibilityFilter
+  }
 }

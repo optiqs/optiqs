@@ -3,6 +3,8 @@ import {VisibilityFilter, VisibilityFilterAction} from '../types/visibilityFilte
 export const setVisibilityFilter = (filter: VisibilityFilter): VisibilityFilterAction => {
   return {
     type: 'SET_VISIBILITY_FILTER',
-    filter
+    payload: {
+      filter
+    }
   }
 }
