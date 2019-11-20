@@ -3,9 +3,9 @@
 `optics` is a state management library for typescript apps based on [monocle-ts](https://github.com/gcanti/monocle-ts). It currently implements a single reducer and action creator, ready to be hooked in a standard redux setup.
 
 
-## install (to be published...)
+## install
 
-`npm install optics`
+`npm install @myopia/optics`
 
 ## setup
 
@@ -89,7 +89,9 @@ Optics also makes you think more generically about your update functions, since 
 
 <img src="https://media.giphy.com/media/l1KVaj5UcbHwrBMqI/source.gif" width="200" height="120" />
 
-[not really](https://github.com/optics/optics-gen)
+well, [not really](https://github.com/optics/optics-gen).
+
+The optics generator should be able to generate all lenses from  basic typescript definitions, even across multiple files. It is under active development.
 
 ## dependencies
 
