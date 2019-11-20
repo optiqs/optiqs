@@ -12,7 +12,7 @@ type OwnProps = {
 
 const mapStateToProps = (state: State, ownProps: OwnProps) => {
   return {
-    active: state.visibilityFilter === ownProps.filter
+    active: state ? state.visibilityFilter === ownProps.filter : false
   }
 }
 

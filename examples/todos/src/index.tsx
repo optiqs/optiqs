@@ -1,17 +1,39 @@
 import React from 'react'
 import {render} from 'react-dom'
 import {Provider} from 'react-redux'
-import {createStore} from 'redux'
-
+import {createStore, compose, applyMiddleware} from 'redux'
+import createSagaMiddleware from 'redux-saga'
 import App from './components/App'
-import {reducer, OpticsAction} from '@myopia/optics'
+import {reducer, OpticsAction, updateState} from '@myopia/optics'
 import {State} from './types'
+import {all} from '@redux-saga/core/effects'
+import {todoSagas} from './actions/todos'
+
+function* sagas() {
+  yield all([...todoSagas])
+}
+
+const sagaMiddleware = createSagaMiddleware()
+
+const composeEnhancers =
+  typeof window === 'object' &&
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    : compose
+
+const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware))
 
 const store = createStore<State, OpticsAction<State>, void, void>(
   reducer,
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+  enhancer
 )
+
+store.dispatch(
+  updateState<State>(_ => ({todos: [], visibilityFilter: 'SHOW_ALL'}))
+)
+
+sagaMiddleware.run(sagas)
+
 const element = document.getElementById('root')
 if (!element) {
   throw new Error("couldn't find element with id root")
