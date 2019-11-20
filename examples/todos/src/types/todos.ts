@@ -15,5 +15,16 @@ export type TodosState = {
 }
 
 export type TodosAction =
-  | {type: 'ADD_TODO'; readonly id: Id; readonly text: Text}
-  | {type: 'TOGGLE_TODO'; readonly id: Id}
+  | {
+      readonly type: 'ADD_TODO'
+      readonly payload: {
+        readonly id: Id
+        readonly text: Text
+      }
+    }
+  | {
+      readonly type: 'TOGGLE_TODO'
+      readonly payload: {
+        readonly id: Id
+      }
+    }
