@@ -34,6 +34,14 @@ function* save(action) {
 
 ## usage
 
+Feel free to look at the example todos app, particularly the following files:
+
+[todo actions](examples/todos/src/actions/todos.ts)
+
+[visibility actions](examples/todos/src/actions/visibilityFilter.ts)
+
+[lenses](examples/todos/src/lenses/index.ts)
+
 #### What arguments do I pass to my update state?
 
 Any lens composed from your state root
