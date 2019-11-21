@@ -8,9 +8,10 @@ import {reducer, OpticsAction, updateState} from '@myopia/optics'
 import {State} from './types'
 import {all} from '@redux-saga/core/effects'
 import {todoSagas} from './actions/todos'
+import {visibilityFilterSagas} from './actions/visibilityFilter'
 
 function* sagas() {
-  yield all([...todoSagas])
+  yield all([...todoSagas, ...visibilityFilterSagas])
 }
 
 const sagaMiddleware = createSagaMiddleware()

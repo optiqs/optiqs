@@ -17,8 +17,8 @@ export const updateState: OpticsActionCreator = payload => ({
 })
 
 export const reducer: OpticsReducer = (state, action) =>
-  state && action.type === '__OPTICS/UPDATE__'
+  action.type === '__OPTICS/UPDATE__'
     ? Array.isArray(action.payload)
       ? action.payload.reduce((st, fn) => fn(st), state)
       : action.payload(state)
-    : null
+    : state
