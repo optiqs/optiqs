@@ -2,6 +2,9 @@
 
 `optiqs` is a state management library for typescript apps based on [monocle-ts](https://github.com/gcanti/monocle-ts). It currently implements a single reducer and action creator, ready to be hooked in a standard redux setup.
 
+# use case (tl;dr)
+
+`optics` is an alternarnative to the redux approach to state management. Instead of having to write reducers and selectors, (and tests for each of these) you'll leverage different optics abstractions to make each state update or read simple, type-safe and easy to compose. You don't have to be familiar with optics or functional programming in general to use this library. You'll find that writing and composing lenses, traversals is really easy and offer a more obvious approach to state management than standard redux.
 
 ## install
 
@@ -11,7 +14,7 @@
 
 In your store setup, just hook up the reducer provided. It's the only one you'll need.
 
-You can either use the reducer and dispatch an action to set the initial state:
+You can either use the reducer and dispatch an `updateState` action to set the initial state:
 
 ```typescript
 import {createStore, applyMiddleware} from 'redux'
@@ -29,7 +32,7 @@ store.dispatch(
 )
 ```
 
-Or use createReducer and pass your initial state
+Or use `createReducer` and pass your initial state:
 
 ```typescript
 import {createStore, applyMiddleware} from 'redux'
@@ -43,16 +46,14 @@ export const store =
     )
 ```
 
-Your side effects layer is now ready to dispatch update actions:
+Your side effects layer is now ready to make updates to your state:
 
 ```typescript
-
 function* save(action) {
     const result = yield call(api, {data: action.payload})
     if (result.isSuccess)
         yield put(updateState(...))
 }
-
 ```
 
 ## usage
