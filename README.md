@@ -11,13 +11,36 @@
 
 In your store setup, just hook up the reducer provided. It's the only one you'll need.
 
+You can either use the reducer and dispatch an action to set the initial state:
+
 ```typescript
+import {createStore, applyMiddleware} from 'redux'
+import {initialState, State} from './state.ts'
+import {reducer, OpticsAction, updateState} from '@myopia/optics'
 
-import {Store, createStore, applyMiddleware, compose} from 'redux'
-import {reducer} from 'optics'
+export const store =
+    createStore<State, OpticsAction<State>, void, void>(
+        reducer,
+        applyMiddleware(...)
+    )
 
-export const store: Store<State> = createStore(reducer, applyMiddleware(...))
+store.dispatch(
+  updateState<State>(_ => initialState)
+)
+```
 
+Or use createReducer and pass your initial state
+
+```typescript
+import {createStore, applyMiddleware} from 'redux'
+import {initialState, State} from './state.ts'
+import {createReducer, OpticsAction, updateState} from '@myopia/optics'
+
+export const store =
+    createStore<State, OpticsAction<State>, void, void>(
+        createReducer(initialState),
+        applyMidleware(...)
+    )
 ```
 
 Your side effects layer is now ready to dispatch update actions:
@@ -47,7 +70,6 @@ Feel free to look at the example todos app, particularly the following files:
 Any lens composed from your state root
 
 ```typescript
-
 // in your lenses
 
 const getAuthentication = Lens.fromProp<State>()('authentication')
@@ -67,7 +89,6 @@ yield put(updateState([
     selectEmail.set('new@email.com'),
     selectAge.set(55),
 ]))
-
 ```
 
 ## ![image](https://media.tenor.com/images/74eae4ff92a933aaecf5b968aed5818d/tenor.gif)

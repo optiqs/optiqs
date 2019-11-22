@@ -1,4 +1,4 @@
-import {updateState, reducer, OpticsAction} from './optics'
+import {updateState, reducer, OpticsAction, createReducer} from './optics'
 import {createStore} from 'redux'
 
 type TestState = {
@@ -36,4 +36,17 @@ test('reducer is compatible with createStore', () => {
   type State = {a: string}
   const store = createStore<State, OpticsAction<State>, void, void>(reducer)
   expect(store).toBeDefined()
+})
+
+test('createReducer allows passing of initial state', () => {
+  type State = {a: string; b: number; c: string[]}
+  const initialState = {
+    a: 'a',
+    b: 0,
+    c: ['a', 'b', 'c']
+  }
+  const store = createStore<State, OpticsAction<State>, void, void>(createReducer(initialState))
+  const updateFn = (s: State) => ({...s, a: 'bob'})
+  store.dispatch(updateState(updateFn))
+  expect(store.getState()).toEqual(updateFn(initialState))
 })

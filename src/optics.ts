@@ -9,7 +9,11 @@ export type OpticsActionCreatorPayload<S> = OpticsStateUpdateFn<S> | OpticsState
 
 export type OpticsActionCreator = <S>(payload: OpticsActionCreatorPayload<S>) => OpticsAction<S>
 
-export type OpticsReducer = <S = any>(state: S | undefined, action: OpticsAction<S>) => S
+export type OpticsReducer = <S>(state: S | undefined, action: OpticsAction<S>) => S
+
+export type CreateReducer = <S>(
+  initialState: S
+) => (state: S | undefined, action: OpticsAction<S>) => S
 
 export const updateState: OpticsActionCreator = payload => ({
   type: '__OPTICS/UPDATE__',
@@ -22,3 +26,6 @@ export const reducer: OpticsReducer = (state, action) =>
       ? action.payload.reduce((st, fn) => fn(st), state)
       : action.payload(state)
     : state
+
+export const createReducer: CreateReducer = initialState => (state = initialState, action) =>
+  reducer(state, action)
