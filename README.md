@@ -4,7 +4,7 @@
 
 # use case (tl;dr)
 
-`optics` is an alternarnative to the redux approach to state management. Instead of having to write reducers and selectors, (and tests for each of these) you'll leverage different optics abstractions to make each state update or read simple, type-safe and easy to compose. You don't have to be familiar with optics or functional programming in general to use this library. You'll find that writing and composing lenses, traversals is really easy and offer a more obvious approach to state management than standard redux.
+`optics` is an alternative to the Redux approach to state management. Instead of having to write reducers and selectors, (and tests for each of these) you'll leverage different optics abstractions to make each state update or read simple, type-safe and easy to compose. You don't have to be familiar with optics or functional programming in general to use this library. You'll find that writing and composing lenses, traversals is really easy and offer a more obvious approach to state management than standard Redux.
 
 ## install
 
