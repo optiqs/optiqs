@@ -4,7 +4,7 @@
 
 # use case (tl;dr)
 
-`optics` is an alternative to the Redux approach to state management. Instead of having to write reducers and selectors, (and tests for each of these) you'll leverage different optics abstractions to make each state update or read simple, type-safe and easy to compose. You don't have to be familiar with optics or functional programming in general to use this library. You'll find that writing and composing lenses, traversals is really easy and offer a more obvious approach to state management than standard Redux.
+`optiqs` is an alternative to the Redux approach to state management. Instead of having to write reducers and selectors, (and tests for each of these) you'll leverage different optics abstractions to make each state update or read simple, type-safe and easy to compose. You don't have to be familiar with optics or functional programming in general to use this library. You'll find that writing and composing lenses, traversals is really easy and offer a more obvious approach to state management than standard Redux.
 
 ## install
 
@@ -19,10 +19,10 @@ You can either use the reducer and dispatch an `updateState` action to set the i
 ```typescript
 import {createStore, applyMiddleware} from 'redux'
 import {initialState, State} from './state.ts'
-import {reducer, OpticsAction, updateState} from '@optiqs/optiqs'
+import {reducer, OptiqsAction, updateState} from '@optiqs/optiqs'
 
 export const store =
-    createStore<State, OpticsAction<State>, void, void>(
+    createStore<State, OptiqsAction<State>, void, void>(
         reducer,
         applyMiddleware(...)
     )
@@ -37,10 +37,10 @@ Or use `createReducer` and pass your initial state:
 ```typescript
 import {createStore, applyMiddleware} from 'redux'
 import {initialState, State} from './state.ts'
-import {createReducer, OpticsAction, updateState} from '@optiqs/optiqs'
+import {createReducer, OptiqsAction, updateState} from '@optiqs/optiqs'
 
 export const store =
-    createStore<State, OpticsAction<State>, void, void>(
+    createStore<State, OptiqsAction<State>, void, void>(
         createReducer(initialState),
         applyMidleware(...)
     )
@@ -121,7 +121,7 @@ Optics also makes you think more generically about your update functions, since 
 
 well, [not really](https://github.com/optiqs/optiqs-gen).
 
-The optics generator should be able to generate all lenses from  basic typescript definitions, even across multiple files. It is under active development.
+The optics generator (`optiqs-gen`) should be able to generate all lenses from  basic typescript definitions, even across multiple files. It is under active development.
 
 ## dependencies
 
