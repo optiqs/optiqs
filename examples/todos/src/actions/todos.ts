@@ -1,6 +1,6 @@
 import {Id, Text, Todo} from '../types/todos'
 import {put, takeLatest} from '@redux-saga/core/effects'
-import {updateState} from '@myopia/optics'
+import {updateState} from '@optiqs/optiqs'
 import {selectTodos, selectTodoCompleted} from '../lenses'
 
 export const append = <T>(item: T) => (arr: T[]) => arr.concat(item)

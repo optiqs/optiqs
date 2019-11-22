@@ -1,6 +1,6 @@
 import {VisibilityFilter, VisibilityFilterAction} from '../types/visibilityFilter'
 import {put, takeLatest} from '@redux-saga/core/effects'
-import {updateState} from '@myopia/optics'
+import {updateState} from '@optiqs/optiqs'
 import {selectVisibilityFilter} from '../lenses'
 
 export const setVisibilityFilter = (filter: VisibilityFilter): VisibilityFilterAction => {

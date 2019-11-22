@@ -4,7 +4,7 @@ import {Provider} from 'react-redux'
 import {createStore, compose, applyMiddleware} from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import App from './components/App'
-import {reducer, OpticsAction, updateState} from '@myopia/optics'
+import {reducer, OptiqsAction, updateState} from '@optiqs/optiqs'
 import {State} from './types'
 import {all} from '@redux-saga/core/effects'
 import {todoSagas} from './actions/todos'
@@ -24,7 +24,7 @@ const composeEnhancers =
 
 const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware))
 
-const store = createStore<State, OpticsAction<State>, void, void>(
+const store = createStore<State, OptiqsAction<State>, void, void>(
   reducer,
   enhancer
 )

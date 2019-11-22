@@ -11,8 +11,8 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "@myopia/optics": "file:../../",
-    "@myopia/projections": "^1.0.0",
+    "@optiqs/optiqs": "file:../../",
+    "@optiqs/projections": "^1.0.0",
     "fp-ts": "^2.1.2",
     "monocle-ts": "^2.0.0",
     "react": "^16.12.0",

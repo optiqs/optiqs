@@ -2,7 +2,7 @@ import {Lens, fromTraversable} from 'monocle-ts'
 import {array} from 'fp-ts/lib/Array'
 import {State} from '../types'
 import {Todo} from '../types/todos'
-import '@myopia/projections'
+import '@optiqs/projections'
 
 export const getTodos = Lens.fromProp<State>()('todos')
 export const selectTodos = getTodos

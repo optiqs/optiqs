@@ -1,1 +1,1 @@
-export * from './optics'
+export * from './optiqs'

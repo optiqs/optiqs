@@ -1,5 +1,5 @@
 {
-  "name": "@myopia/optics",
+  "name": "@optiqs/optiqs",
   "description": "A state management library based on optics",
   "version": "1.0.2",
   "main": "lib/index.js",

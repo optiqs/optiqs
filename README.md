@@ -1,11 +1,11 @@
-# optics
+# optiqs
 
-`optics` is a state management library for typescript apps based on [monocle-ts](https://github.com/gcanti/monocle-ts). It currently implements a single reducer and action creator, ready to be hooked in a standard redux setup.
+`optiqs` is a state management library for typescript apps based on [monocle-ts](https://github.com/gcanti/monocle-ts). It currently implements a single reducer and action creator, ready to be hooked in a standard redux setup.
 
 
 ## install
 
-`npm install @myopia/optics`
+`npm install @optiqs/optiqs`
 
 ## setup
 
@@ -16,7 +16,7 @@ You can either use the reducer and dispatch an action to set the initial state:
 ```typescript
 import {createStore, applyMiddleware} from 'redux'
 import {initialState, State} from './state.ts'
-import {reducer, OpticsAction, updateState} from '@myopia/optics'
+import {reducer, OpticsAction, updateState} from '@optiqs/optiqs'
 
 export const store =
     createStore<State, OpticsAction<State>, void, void>(
@@ -34,7 +34,7 @@ Or use createReducer and pass your initial state
 ```typescript
 import {createStore, applyMiddleware} from 'redux'
 import {initialState, State} from './state.ts'
-import {createReducer, OpticsAction, updateState} from '@myopia/optics'
+import {createReducer, OpticsAction, updateState} from '@optiqs/optiqs'
 
 export const store =
     createStore<State, OpticsAction<State>, void, void>(
@@ -97,9 +97,9 @@ Optics, more specifically lenses give you access to all getters and setters for 
 
 ## you're tired of writing reducers and selectors
 
-As an example, let's say you want to retrieve some nested property from your state and show it in a view. Then you want to update it somehow. Here's a side by side comparison between the standard redux abstractions like selectors and reducers, and optics using [redux-saga](https://github.com/redux-saga/redux-saga) :
+As an example, let's say you want to retrieve some nested property from your state and show it in a view. Then you want to update it somehow. Here's a side by side comparison between the standard redux abstractions like selectors and reducers, and optiqs using [redux-saga](https://github.com/redux-saga/redux-saga) :
 
-Standard               |  Optics
+Standard               |  Optiqs
 :---------------------:|:-------------------------:
 ![](docs/standard.png) |![](docs/optics.png)
 
@@ -118,7 +118,7 @@ Optics also makes you think more generically about your update functions, since 
 
 <img src="https://media.giphy.com/media/l1KVaj5UcbHwrBMqI/source.gif" width="200" height="120" />
 
-well, [not really](https://github.com/optics/optics-gen).
+well, [not really](https://github.com/optiqs/optiqs-gen).
 
 The optics generator should be able to generate all lenses from  basic typescript definitions, even across multiple files. It is under active development.
 
@@ -126,11 +126,11 @@ The optics generator should be able to generate all lenses from  basic typescrip
 
 You'll want to get [monocle-ts](https://github.com/gcanti/monocle-ts) and [fp-ts](https://github.com/gcanti/fp-ts).
 
-`optics` also extend `monocle-ts` and introduces the concept of [projections](https://github.com/optics/projections), which is a peer of this library.
+`optiqs` also extend `monocle-ts` and introduces the concept of [projections](https://github.com/optiqs/projections), which is a peer of this library.
 
-`optics` shouldn't actually depend on redux at all, but we do export everything as a reducer and action creator to make use of the great devtools redux has.
+`optiqs` shouldn't actually depend on redux at all, but we do export everything as a reducer and action creator to make use of the great devtools redux has.
 
 ## documentation
 
-If you're looking for more information about optics in typescript, the [monocle-ts](https://github.com/gcanti/monocle-ts) website is a good start. More information will be added to the `optics` library as needed.
+If you're looking for more information about optics in typescript, the [monocle-ts](https://github.com/gcanti/monocle-ts) website is a good start. More information will be added to the `optiqs` library as needed.
 
