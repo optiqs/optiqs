@@ -1,6 +1,6 @@
 # optiqs
 
-`optiqs` is a state management library for typescript apps based on [monocle-ts](https://github.com/gcanti/monocle-ts). It currently implements a single reducer and action creator, ready to be hooked in a standard redux setup.
+`optiqs` is a state management library for typescript apps based on [monocle-ts](https://github.com/gcanti/monocle-ts). The library itself is only 350b minified and gzipped. It currently implements a single reducer and action creator, ready to be hooked in a standard redux setup.
 
 # use case (tl;dr)
 
