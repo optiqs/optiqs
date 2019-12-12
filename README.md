@@ -101,9 +101,9 @@ But this one is also a bit awkward, because now you're in a Member page, dispatc
 
 So let's ignore syntax for a bit and think about how we would want to solve this in an ideal world. From the solutions above we can see that we want:
 
-- [] All the logic is declared in a single workflow (no scattered logic across multiple modules)
-- [] No intermediate invalid states
-- [] An obvious source where your action is handled, the consumer does not have to know about relationships
+- [ ] All the logic is declared in a single workflow (no scattered logic across multiple modules)
+- [ ] No intermediate invalid states
+- [ ] An obvious source where your action is handled, the consumer does not have to know about relationships
 
 Here's an ideal code snipped of what we want, in pseudo-language:
 
