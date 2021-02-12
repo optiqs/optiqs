@@ -6,7 +6,7 @@ type TestState = {
 }
 
 test('updateState creates a standard action', () => {
-  const actual = updateState<TestState>(_ => ({name: 'bob'}))
+  const actual = updateState<TestState>(() => ({name: 'bob'}))
   expect(actual).toHaveProperty('payload')
   expect(actual).toHaveProperty('type')
 })
