@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react'
+import {ReactNode} from 'react'
 
 export type Props = {
   active: boolean
@@ -12,7 +12,7 @@ const Link = ({active, children, onClick}: Props) => {
   }
 
   return (
-    <a // eslint-disable-line jsx-a11y/anchor-is-valid
+    <a
       href='#'
       onClick={event => {
         event.preventDefault()

@@ -15,13 +15,15 @@ export type CreateReducer = <S>(
   initialState: S
 ) => (state: S | undefined, action: OptiqsAction<S>) => S
 
+const OPTIQS_UPDATE = '__OPTIQS/UPDATE__'
+
 export const updateState: OptiqsActionCreator = payload => ({
-  type: '__OPTIQS/UPDATE__',
+  type: OPTIQS_UPDATE,
   payload
 })
 
 export const reducer: OptiqsReducer = (state, action) =>
-  action.type === '__OPTIQS/UPDATE__'
+  action.type === OPTIQS_UPDATE
     ? Array.isArray(action.payload)
       ? action.payload.reduce((st, fn) => fn(st), state)
       : action.payload(state)
