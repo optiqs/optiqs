@@ -1,6 +1,6 @@
 export type OptiqsStateUpdateFn<S> = (fn: S) => S
 
-export type OptiqsAction<S> = {
+export interface OptiqsAction<S> {
   readonly type: '__OPTIQS/UPDATE__'
   readonly payload: OptiqsStateUpdateFn<S> | OptiqsStateUpdateFn<S>[]
 }
